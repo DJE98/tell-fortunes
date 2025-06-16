@@ -161,8 +161,7 @@ def print_robot(ep):
 :::=###==###@@@# @@@#:=###=:::
 :::=#@#=:=@=@@@# @@@#:=#@#=:::
 :::=###==#################=:::
-:::=@@@@##@@@@@@@@@@@@@@@@=:::
-    """
+:::=@@@@##@@@@@@@@@@@@@@@@=:::"""
     )
 
 def print_logo(ep):
@@ -173,8 +172,8 @@ def print_logo(ep):
 |__ \__|__\\|_|____|__\_|_n_|
  / \ / \| | | | | | | \_/ |  
 | o | o | | | U | |_| \_/ |  
-|_n_|_n_|_| |___|___|_| |_|  
-             ''')
+|_n_|_n_|_| |___|___|_| |_|''')
+    
 
 
 def reattach(dev, needs_reattach):
@@ -191,9 +190,10 @@ def main():
             dev, needs_reattach, ep = configure_printer()
             assert ep is not None
             fortune = generate_fortune()
-            print_message(ep, fortune)
             print_random_ascii_art(ep)
             ep.write("\n")
+            print_message(ep, fortune)
+            ep.write("\n\n")
             reattach(dev, needs_reattach)
             sleep(10)
 
