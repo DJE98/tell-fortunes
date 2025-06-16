@@ -1,5 +1,6 @@
 import random
 import textwrap
+from time import sleep
 
 import keyboard
 import usb.core
@@ -194,5 +195,6 @@ def main():
             print_random_ascii_art(ep)
             ep.write("\n")
             reattach(dev, needs_reattach)
+            sleep(10)
 
 main()
