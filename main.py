@@ -145,6 +145,11 @@ def print_message(ep, message):
     for line in lines:
         ep.write(line + "\n")
 
+def print_random_ascii_art(ep):
+    if random.random() < 0.5: 
+        print_logo(ep)
+    else:
+        print_robot(ep)
 
 def print_robot(ep):
     ep.write(
@@ -158,6 +163,17 @@ def print_robot(ep):
 :::=@@@@##@@@@@@@@@@@@@@@@=:::
     """
     )
+
+def print_logo(ep):
+    ep.write(r'''
+ ___ _  ___ ___ _ _ _  _  _  
+| __/ \| o |_ _| | | \| |/ \ 
+| _( o |   /| || U | \\ | o |
+|__ \__|__\\|_|____|__\_|_n_|
+ / \ / \| | | | | | | \_/ |  
+| o | o | | | U | |_| \_/ |  
+|_n_|_n_|_| |___|___|_| |_|  
+             ''')
 
 
 def reattach(dev, needs_reattach):
@@ -175,9 +191,8 @@ def main():
             assert ep is not None
             fortune = generate_fortune()
             print_message(ep, fortune)
-            print_robot(ep)
+            print_random_ascii_art(ep)
             ep.write("\n")
             reattach(dev, needs_reattach)
-
 
 main()

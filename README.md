@@ -7,7 +7,7 @@ This tiny Python script sends a procedurally generated fortune to a POS58 USB th
 
 * Generates playful “science-and-software” themed fortunes  
 * Works out-of-the-box with the common **0x0416 : 0x5011 POS58** thermal receipt printer  
-* ASCII art robot for extra delight  
+* ASCII art logo or robot for extra delight  
 * Simple keyboard trigger (the **Enter** key)  
 * Fortune lists are plain Python lists—edit freely
 
