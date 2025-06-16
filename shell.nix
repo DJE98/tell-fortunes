@@ -6,6 +6,7 @@ mkShell {
     buildInputs = [
     pkgs.python3
     pkgs.python3Packages.pyusb
+    pkgs.python3Packages.keyboard
   ];
 
   shellHook = ''

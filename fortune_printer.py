@@ -1,8 +1,9 @@
+import random
+import textwrap
+
+import keyboard
 import usb.core
 import usb.util
-import textwrap
-import random
-import keyboard
 
 # In Linux, you must:
 #
@@ -39,9 +40,8 @@ fortune_intros = [
     "In the cosmic dance of atoms, you will",
     "By the principles of evolution, you will",
     "As the stars whisper, you will",
-    "Under the gaze of the cosmos, you will"
-    "As the planets align, you will",
-    "Beneath a starlit sky, you will"
+    "Under the gaze of the cosmos, you will" "As the planets align, you will",
+    "Beneath a starlit sky, you will",
 ]
 
 fortune_actions = [
@@ -69,7 +69,7 @@ fortune_actions = [
     "soar among the constellations with",
     "navigate the celestial map to",
     "dive into the nebula of",
-    "chart the course of"
+    "chart the course of",
 ]
 
 fortune_conclusions = [
@@ -95,7 +95,7 @@ fortune_conclusions = [
     "a scientific breakthrough that rewrites textbooks.",
     "a revolution in our understanding of the universe.",
     "balance in the chaos of the cosmos.",
-    "harmony with the rhythms of the universe."
+    "harmony with the rhythms of the universe.",
 ]
 
 
@@ -106,7 +106,7 @@ def configure_printer():
 
     # Was it found?
     if dev is None:
-        raise ValueError('Device not found')
+        raise ValueError("Device not found")
 
     # Disconnect it from kernel
     needs_reattach = False
@@ -120,17 +120,17 @@ def configure_printer():
 
     # get an endpoint instance
     cfg = dev.get_active_configuration()
-    intf = cfg[(0,0)]
+    intf = cfg[(0, 0)]
 
     ep = usb.util.find_descriptor(
-    intf,
-    # match the first OUT endpoint
-    custom_match = \
-    lambda e: \
-        usb.util.endpoint_direction(e.bEndpointAddress) == \
-        usb.util.ENDPOINT_OUT)
-            
-    return dev,needs_reattach,ep
+        intf,
+        # match the first OUT endpoint
+        custom_match=lambda e: usb.util.endpoint_direction(e.bEndpointAddress)
+        == usb.util.ENDPOINT_OUT,
+    )
+
+    return dev, needs_reattach, ep
+
 
 def generate_fortune():
     intro = random.choice(fortune_intros)
@@ -139,14 +139,16 @@ def generate_fortune():
     fortune = f"{intro} {action} {conclusion}"
     return fortune
 
-def print_fortune(ep, generate_fortune):
-    lines = textwrap.wrap(generate_fortune(), width=30)
+
+def print_text(ep, text):
+    lines = textwrap.wrap(text, width=30)
     for line in lines:
         ep.write(line + "\n")
 
+
 def print_robot(ep):
     ep.write(
-    """
+        """
 ::::::::::::::::::::::::::::::
 ::::::::::==########=:::::::::
 :::== =::=@#@@@@@@@@#:== ==:::
@@ -161,25 +163,28 @@ def print_robot(ep):
 :::.:==#.::.#@:.:.=@=.=.:=.:::
 ::::@@@=.##.:#.=@::#::@=#=.:::
 :::=@@@##@@#####@#####@@@#=:::
-    """)
+    """
+    )
 
 
 def reattach(dev, needs_reattach):
     dev.reset()
     if needs_reattach:
         dev.attach_kernel_driver(0)
-        print ("Reattached USB device to kernel driver")
+        print("Reattached USB device to kernel driver")
+
 
 def main():
     while True:
         event = keyboard.read_event()
-        if event.event_type == keyboard.KEY_DOWN and event.name == 'enter':
+        if event.event_type == keyboard.KEY_DOWN and event.name == "enter":
             dev, needs_reattach, ep = configure_printer()
             assert ep is not None
-            print_fortune(ep, generate_fortune)
+            fortune = generate_fortune()
+            print_text(ep, fortune)
             print_robot(ep)
             ep.write("\n\n")
-            reattach(dev, needs_reattach) 
+            reattach(dev, needs_reattach)
 
 
 main()
