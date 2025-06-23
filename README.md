@@ -1,6 +1,6 @@
 # 🧾 Fortuna AAI
 
-![Fortuna AAI](./fortuna_aai.jpg)
+![Fortuna AAI](./fortuna_aai.jpg){ width: 200px; }
 
 Press **Enter**, print a paper fortune.  
 This tiny Python script sends a procedurally generated fortune to a POS58 USB thermal receipt printer.
