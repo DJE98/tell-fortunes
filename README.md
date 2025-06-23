@@ -1,4 +1,6 @@
-# 🧾 Tell-Fortunes
+# 🧾 Fortuna AAI
+
+![Fortuna AAI](./fortuna_aai.jpg)
 
 Press **Enter**, print a paper fortune.  
 This tiny Python script sends a procedurally generated fortune to a POS58 USB thermal receipt printer.
@@ -21,3 +23,8 @@ Any ESC/POS-compatible thermal printer that shows up as a USB bulk device should
 
 ```bash
 pip install pyusb keyboard
+
+## Developer
+
+@DJE98
+@busy-age
