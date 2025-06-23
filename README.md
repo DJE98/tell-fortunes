@@ -23,6 +23,7 @@ Any ESC/POS-compatible thermal printer that shows up as a USB bulk device should
 
 ```bash
 pip install pyusb keyboard
+```
 
 ## Developer
 
